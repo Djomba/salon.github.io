@@ -3,75 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Запись на маникюр</title>
+    <title>Салон красоты</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>💅 Запись на маникюр</h1>
-            <p>Заполните форму для записи</p>
+    <div class="app">
+        <!-- Главный экран с приветствием -->
+        <div id="homeScreen" class="screen active">
+            <div class="welcome-section">
+                <div class="welcome-content">
+                    <div class="welcome-icon">💅</div>
+                    <h1 class="welcome-title">Добро пожаловать</h1>
+                    <p class="welcome-subtitle">В наш салон красоты</p>
+                </div>
+            </div>
+            
+            <nav class="main-menu">
+                <button class="menu-item" data-screen="profile">
+                    <span class="menu-icon">👤</span>
+                    <span class="menu-text">Мой профиль</span>
+                    <span class="menu-arrow">→</span>
+                </button>
+                <button class="menu-item" data-screen="services">
+                    <span class="menu-icon">✨</span>
+                    <span class="menu-text">Наши услуги</span>
+                    <span class="menu-arrow">→</span>
+                </button>
+                <button class="menu-item" data-screen="appointment">
+                    <span class="menu-icon">📅</span>
+                    <span class="menu-text">Запись</span>
+                    <span class="menu-arrow">→</span>
+                </button>
+                <button class="menu-item" data-screen="address">
+                    <span class="menu-icon">📍</span>
+                    <span class="menu-text">Наш адрес</span>
+                    <span class="menu-arrow">→</span>
+                </button>
+                <button class="menu-item" data-screen="contact">
+                    <span class="menu-icon">📞</span>
+                    <span class="menu-text">Контактный номер</span>
+                    <span class="menu-arrow">→</span>
+                </button>
+            </nav>
         </div>
 
-        <form id="appointmentForm" class="form">
-            <div class="form-group">
-                <label for="name">Ваше имя *</label>
-                <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+        <!-- Экран профиля -->
+        <div id="profileScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('home')">← Назад</button>
+                <h2>Мой профиль</h2>
             </div>
-
-            <div class="form-group">
-                <label for="phone">Номер телефона *</label>
-                <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
+            <div class="screen-content">
+                <div class="profile-card">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-info" id="profileInfo">
+                        <p class="info-text">Загрузка данных...</p>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="action-btn" onclick="showMyAppointments()">
+                        📋 Мои записи
+                    </button>
+                </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="service">Выберите услугу *</label>
-                <select id="service" name="service" required>
-                    <option value="">-- Выберите услугу --</option>
-                    <option value="Классический маникюр">Классический маникюр</option>
-                    <option value="Аппаратный маникюр">Аппаратный маникюр</option>
-                    <option value="Покрытие гель-лаком">Покрытие гель-лаком</option>
-                    <option value="Дизайн ногтей">Дизайн ногтей</option>
-                    <option value="Наращивание ногтей">Наращивание ногтей</option>
-                    <option value="Педикюр">Педикюр</option>
-                    <option value="Комплекс (маникюр + педикюр)">Комплекс (маникюр + педикюр)</option>
-                </select>
+        <!-- Экран услуг -->
+        <div id="servicesScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('home')">← Назад</button>
+                <h2>Наши услуги</h2>
             </div>
-
-            <div class="form-group">
-                <label for="date">Выберите дату *</label>
-                <input type="date" id="date" name="date" required>
+            <div class="screen-content">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">💅</div>
+                        <h3>Классический маникюр</h3>
+                        <p>От 1500₽</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🔧</div>
+                        <h3>Аппаратный маникюр</h3>
+                        <p>От 2000₽</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">✨</div>
+                        <h3>Покрытие гель-лаком</h3>
+                        <p>От 1800₽</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h3>Дизайн ногтей</h3>
+                        <p>От 500₽</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💎</div>
+                        <h3>Наращивание ногтей</h3>
+                        <p>От 3000₽</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🦶</div>
+                        <h3>Педикюр</h3>
+                        <p>От 2000₽</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🌟</div>
+                        <h3>Комплекс</h3>
+                        <p>От 3500₽</p>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="time">Выберите время *</label>
-                <select id="time" name="time" required>
-                    <option value="">-- Выберите время --</option>
-                    <option value="09:00">09:00</option>
-                    <option value="10:00">10:00</option>
-                    <option value="11:00">11:00</option>
-                    <option value="12:00">12:00</option>
-                    <option value="13:00">13:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                    <option value="17:00">17:00</option>
-                    <option value="18:00">18:00</option>
-                    <option value="19:00">19:00</option>
-                    <option value="20:00">20:00</option>
-                </select>
+        <!-- Экран записи -->
+        <div id="appointmentScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('home')">← Назад</button>
+                <h2>Запись на услугу</h2>
             </div>
+            <div class="screen-content">
+                <form id="appointmentForm" class="appointment-form">
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+                    </div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">
-                📅 Записаться
-            </button>
-        </form>
+                    <div class="form-group">
+                        <label for="phone">Номер телефона *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
+                    </div>
 
-        <div id="successMessage" class="success-message" style="display: none;">
-            <div class="success-content">
-                <h2>✅ Запись успешно создана!</h2>
-                <p>Мы свяжемся с вами для подтверждения.</p>
+                    <div class="form-group">
+                        <label for="service">Выберите услугу *</label>
+                        <select id="service" name="service" required>
+                            <option value="">-- Выберите услугу --</option>
+                            <option value="Классический маникюр">Классический маникюр</option>
+                            <option value="Аппаратный маникюр">Аппаратный маникюр</option>
+                            <option value="Покрытие гель-лаком">Покрытие гель-лаком</option>
+                            <option value="Дизайн ногтей">Дизайн ногтей</option>
+                            <option value="Наращивание ногтей">Наращивание ногтей</option>
+                            <option value="Педикюр">Педикюр</option>
+                            <option value="Комплекс (маникюр + педикюр)">Комплекс (маникюр + педикюр)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Выберите дату *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Выберите время *</label>
+                        <select id="time" name="time" required>
+                            <option value="">-- Выберите время --</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        📅 Записаться
+                    </button>
+                </form>
+
+                <div id="successMessage" class="success-message" style="display: none;">
+                    <div class="success-content">
+                        <div class="success-icon">✅</div>
+                        <h2>Запись успешно создана!</h2>
+                        <p>Мы свяжемся с вами для подтверждения.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран адреса -->
+        <div id="addressScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('home')">← Назад</button>
+                <h2>Наш адрес</h2>
+            </div>
+            <div class="screen-content">
+                <div class="info-card">
+                    <div class="info-icon">📍</div>
+                    <h3>Адрес салона</h3>
+                    <p class="info-text">г. Москва, ул. Примерная, д. 123</p>
+                    <p class="info-subtext">ТЦ "Красота", 2 этаж, офис 205</p>
+                    <button class="map-btn" onclick="openMap()">🗺️ Открыть карту</button>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🕐</div>
+                    <h3>Режим работы</h3>
+                    <p class="info-text">Пн-Пт: 09:00 - 20:00</p>
+                    <p class="info-text">Сб-Вс: 10:00 - 18:00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран контактов -->
+        <div id="contactScreen" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('home')">← Назад</button>
+                <h2>Контакты</h2>
+            </div>
+            <div class="screen-content">
+                <div class="info-card">
+                    <div class="info-icon">📞</div>
+                    <h3>Телефон</h3>
+                    <a href="tel:+79991234567" class="contact-link">+7 (999) 123-45-67</a>
+                    <button class="call-btn" onclick="callPhone('+79991234567')">Позвонить</button>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">💬</div>
+                    <h3>Telegram</h3>
+                    <a href="https://t.me/salon_beauty" class="contact-link">@salon_beauty</a>
+                    <button class="tg-btn" onclick="openTelegram('@salon_beauty')">Написать</button>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">📧</div>
+                    <h3>Email</h3>
+                    <a href="mailto:info@salon.ru" class="contact-link">info@salon.ru</a>
+                </div>
             </div>
         </div>
     </div>
@@ -79,4 +241,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

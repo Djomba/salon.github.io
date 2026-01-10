@@ -2,14 +2,59 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Салон красоты</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>💅 Салон красоты</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta name="theme-color" content="#ff9a9e">
+    <meta name="description" content="Профессиональный салон красоты. Запись на услуги маникюра и педикюра.">
 </head>
 <body>
+    <!-- Контейнер для падающих эмодзи -->
+    <div class="emoji-container">
+        <span class="falling-emoji">💅</span>
+        <span class="falling-emoji">✨</span>
+        <span class="falling-emoji">💄</span>
+        <span class="falling-emoji">💋</span>
+        <span class="falling-emoji">🌸</span>
+        <span class="falling-emoji">💐</span>
+        <span class="falling-emoji">🎀</span>
+        <span class="falling-emoji">💖</span>
+        <span class="falling-emoji">💕</span>
+        <span class="falling-emoji">💗</span>
+        <span class="falling-emoji">💓</span>
+        <span class="falling-emoji">💝</span>
+        <span class="falling-emoji">💞</span>
+        <span class="falling-emoji">💟</span>
+        <span class="falling-emoji">💜</span>
+        <span class="falling-emoji">💙</span>
+        <span class="falling-emoji">💚</span>
+        <span class="falling-emoji">💛</span>
+        <span class="falling-emoji">🧡</span>
+        <span class="falling-emoji">❤️</span>
+        <span class="falling-emoji">⭐</span>
+        <span class="falling-emoji">🌟</span>
+        <span class="falling-emoji">💫</span>
+        <span class="falling-emoji">💎</span>
+        <span class="falling-emoji">🎁</span>
+        <span class="falling-emoji">🎉</span>
+        <span class="falling-emoji">🎊</span>
+        <span class="falling-emoji">🎈</span>
+        <span class="falling-emoji">🌺</span>
+        <span class="falling-emoji">🌻</span>
+        <span class="falling-emoji">🌷</span>
+        <span class="falling-emoji">🌹</span>
+        <span class="falling-emoji">🌼</span>
+        <span class="falling-emoji">💯</span>
+        <span class="falling-emoji">🔥</span>
+        <span class="falling-emoji">🌈</span>
+    </div>
+    
     <div class="app">
-        <!-- Главный экран с приветствием -->
+        <!-- Главный экран -->
         <div id="homeScreen" class="screen active">
             <div class="welcome-section">
                 <div class="welcome-content">
@@ -42,7 +87,7 @@
                 </button>
                 <button class="menu-item" data-screen="contact">
                     <span class="menu-icon">📞</span>
-                    <span class="menu-text">Контактный номер</span>
+                    <span class="menu-text">Контакты</span>
                     <span class="menu-arrow">→</span>
                 </button>
             </nav>
@@ -76,41 +121,288 @@
                 <h2>Наши услуги</h2>
             </div>
             <div class="screen-content">
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">💅</div>
-                        <h3>Классический маникюр</h3>
-                        <p>От 1500₽</p>
+                <div class="services-list">
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">🌟</div>
+                                <div class="service-info">
+                                    <h3>Наращивание ногтей</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">1500₽</span>
+                                        <span class="service-time">⏱️ 2 часа</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Этапы процесса:</strong></p>
+                                <ul>
+                                    <li>С/без снятия старого покрытия с ногтей. 🧽</li>
+                                    <li>Обработка и удаление кутикулы. ✂️</li>
+                                    <li>Наращивание ногтей верхними формами желаемой длины. 🔝📐</li>
+                                    <li>Опил формы. 📏</li>
+                                    <li>Цвет/дизайн (по желанию). 🎨</li>
+                                    <li>Топ. 💎</li>
+                                    <li>Уходовый этап. ✨</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">🔧</div>
-                        <h3>Аппаратный маникюр</h3>
-                        <p>От 2000₽</p>
+
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">👣</div>
+                                <div class="service-info">
+                                    <h3>Гигиенический педикюр с обработкой пяточек</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">1500₽</span>
+                                        <span class="service-time">⏱️ 1 час</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Этапы процесса:</strong></p>
+                                <ul>
+                                    <li>Обработка и удаление кутикулы (при помощи ножниц и ремувера). ✂️</li>
+                                    <li>Удаление длины ногтей. 👣</li>
+                                    <li>Обработка пяточек. ⚒️</li>
+                                    <li>Уходовый этап. ✨</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">✨</div>
-                        <h3>Покрытие гель-лаком</h3>
-                        <p>От 1800₽</p>
+
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">💅</div>
+                                <div class="service-info">
+                                    <h3>Маникюр с покрытием гель-лак</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">1000₽</span>
+                                        <span class="service-time">⏱️ 1 час 30 минут</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Этапы процесса:</strong></p>
+                                <ul>
+                                    <li>Снятие старого покрытия ногтей, придание формы. 🧽</li>
+                                    <li>Обработка и удаление кутикулы. ✂️</li>
+                                    <li>Нанесение базового слоя. 🫷</li>
+                                    <li>Нанесение цветного покрытия. 🌈</li>
+                                    <li>Нанесение топа. 💎</li>
+                                    <li>Уходовый этап. ✨</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">🎨</div>
-                        <h3>Дизайн ногтей</h3>
-                        <p>От 500₽</p>
+
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">💅</div>
+                                <div class="service-info">
+                                    <h3>Педикюр с покрытием гель-лак с обработкой пальчиков</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">1500₽</span>
+                                        <span class="service-time">⏱️ 1 час</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Этапы процесса:</strong></p>
+                                <ul>
+                                    <li>Обработка и удаление кутикулы (при помощи ножниц и ремувера). ✂️</li>
+                                    <li>Удаление длины ногтей. 👣</li>
+                                    <li>Покрытие гель-лаком. 🌈</li>
+                                    <li>Уходовый этап. ✨</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">💎</div>
-                        <h3>Наращивание ногтей</h3>
-                        <p>От 3000₽</p>
+
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">💪</div>
+                                <div class="service-info">
+                                    <h3>Маникюр с покрытием дип системы (Dip Powder)</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">1000₽</span>
+                                        <span class="service-time">⏱️ 2 часа</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Этапы процесса:</strong></p>
+                                <ul>
+                                    <li>Обработка и удаление кутикулы. ✂️</li>
+                                    <li>Придание формы ногтям. 📏</li>
+                                    <li>Покрытие пудрой. 🪣</li>
+                                    <li>Уходовый этап. ✨</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">🦶</div>
-                        <h3>Педикюр</h3>
-                        <p>От 2000₽</p>
+
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">💫</div>
+                                <div class="service-info">
+                                    <h3>Педикюр с покрытием гель-лак с обработкой пальчиков и пяточек</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">2000₽</span>
+                                        <span class="service-time">⏱️ 1 час 20 минут</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Этапы процесса:</strong></p>
+                                <ul>
+                                    <li>Обработка и удаление кутикулы (при помощи ножниц и ремувера). ✂️</li>
+                                    <li>Удаление длины ногтей. 👣</li>
+                                    <li>Обработка пяточек. ⚒️</li>
+                                    <li>Покрытие гель-лаком. 🌈</li>
+                                    <li>Уходовый этап. ✨</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">🌟</div>
-                        <h3>Комплекс</h3>
-                        <p>От 3500₽</p>
+
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">🧼</div>
+                                <div class="service-info">
+                                    <h3>Гигиенический маникюр</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">600₽</span>
+                                        <span class="service-time">⏱️ 30 минут</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Этапы процесса:</strong></p>
+                                <ul>
+                                    <li>Руки обрабатываются дезинфицирующими средствами. 🧴</li>
+                                    <li>Ногти подпиливаются, им придается нужная форма. 📏</li>
+                                    <li>Обрабатывается и удаляется кутикула, убираются заусенцы и тд. ✂️</li>
+                                    <li>На кожу и ногти наносится косметический уход. 💆‍♀️✨</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">🧼</div>
+                                <div class="service-info">
+                                    <h3>Гигиенический педикюр</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">1000₽</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Этапы процесса:</strong></p>
+                                <ul>
+                                    <li>Обработка и удаление кутикулы (при помощи ножниц и ремувера). ✂️</li>
+                                    <li>Удаление длины ногтей. 👣</li>
+                                    <li>Уходовый этап. ✨</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">💅</div>
+                                <div class="service-info">
+                                    <h3>Френч/лунки</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">300₽</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Описание:</strong></p>
+                                <p>Классический французский маникюр или лунки для создания элегантного и ухоженного вида ногтей.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">🎨</div>
+                                <div class="service-info">
+                                    <h3>Фигурки</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">30₽</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Описание:</strong></p>
+                                <p>Декоративные фигурки на ногтях для создания уникального дизайна.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-card-expandable">
+                        <div class="service-header" onclick="toggleService(this)">
+                            <div class="service-main">
+                                <div class="service-icon">✨</div>
+                                <div class="service-info">
+                                    <h3>Слайдеры, стемпинг, стразы и тд.</h3>
+                                    <div class="service-meta">
+                                        <span class="service-price">20₽</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-arrow">▼</div>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-steps">
+                                <p><strong>Описание:</strong></p>
+                                <p>Дополнительные элементы декора: слайдеры, стемпинг, стразы и другие украшения для создания яркого и оригинального дизайна ногтей.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,13 +430,17 @@
                         <label for="service">Выберите услугу *</label>
                         <select id="service" name="service" required>
                             <option value="">-- Выберите услугу --</option>
-                            <option value="Классический маникюр">Классический маникюр</option>
-                            <option value="Аппаратный маникюр">Аппаратный маникюр</option>
-                            <option value="Покрытие гель-лаком">Покрытие гель-лаком</option>
-                            <option value="Дизайн ногтей">Дизайн ногтей</option>
-                            <option value="Наращивание ногтей">Наращивание ногтей</option>
-                            <option value="Педикюр">Педикюр</option>
-                            <option value="Комплекс (маникюр + педикюр)">Комплекс (маникюр + педикюр)</option>
+                            <option value="Наращивание ногтей">🌟 Наращивание ногтей - 1500₽</option>
+                            <option value="Гигиенический педикюр с обработкой пяточек">👣 Гигиенический педикюр с обработкой пяточек - 1500₽</option>
+                            <option value="Маникюр с покрытием гель-лак">💅 Маникюр с покрытием гель-лак - 1000₽</option>
+                            <option value="Педикюр с покрытием гель-лак с обработкой пальчиков">💅 Педикюр с покрытием гель-лак с обработкой пальчиков - 1500₽</option>
+                            <option value="Маникюр с покрытием дип системы (Dip Powder)">💪 Маникюр с покрытием дип системы (Dip Powder) - 1000₽</option>
+                            <option value="Педикюр с покрытием гель-лак с обработкой пальчиков и пяточек">💫 Педикюр с покрытием гель-лак с обработкой пальчиков и пяточек - 2000₽</option>
+                            <option value="Гигиенический маникюр">🧼 Гигиенический маникюр - 600₽</option>
+                            <option value="Гигиенический педикюр">🧼 Гигиенический педикюр - 1000₽</option>
+                            <option value="Френч/лунки">💅 Френч/лунки - 300₽</option>
+                            <option value="Фигурки">🎨 Фигурки - 30₽</option>
+                            <option value="Слайдеры, стемпинг, стразы и тд.">✨ Слайдеры, стемпинг, стразы и тд. - 20₽</option>
                         </select>
                     </div>
 
@@ -173,15 +469,18 @@
                     </div>
 
                     <button type="submit" class="submit-btn" id="submitBtn">
-                        📅 Записаться
+                        <span>📅 Записаться</span>
                     </button>
                 </form>
 
                 <div id="successMessage" class="success-message" style="display: none;">
                     <div class="success-content">
                         <div class="success-icon">✅</div>
-                        <h2>Запись успешно создана!</h2>
-                        <p>Мы свяжемся с вами для подтверждения.</p>
+                        <h2>Запись отправлена!</h2>
+                        <p>Проверьте сообщение в боте с деталями вашей записи.</p>
+                        <p style="margin-top: 15px; font-size: 14px; color: var(--text-secondary);">
+                            Вы можете закрыть это окно и вернуться в бот.
+                        </p>
                     </div>
                 </div>
             </div>

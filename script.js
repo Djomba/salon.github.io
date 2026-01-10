@@ -10,21 +10,51 @@ const userName = user.first_name || 'Гость';
 const userLastName = user.last_name || '';
 const userUsername = user.username || '';
 
-// Функция переключения экранов
+// Функция переключения экранов с максимально плавной анимацией
 function showScreen(screenName) {
-    // Скрываем все экраны
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
+    const screens = document.querySelectorAll('.screen');
+    const targetScreen = document.getElementById(screenName + 'Screen');
+    
+    if (!targetScreen) {
+        document.getElementById('homeScreen').classList.add('active');
+        return;
+    }
+    
+    // Плавное скрытие текущего экрана с эффектом blur
+    screens.forEach(screen => {
+        if (screen.classList.contains('active')) {
+            screen.style.transition = 'opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            screen.style.opacity = '0';
+            screen.style.transform = 'translateY(30px) scale(0.97)';
+            screen.style.filter = 'blur(10px)';
+            
+            setTimeout(() => {
+                screen.classList.remove('active');
+                screen.style.opacity = '';
+                screen.style.transform = '';
+                screen.style.filter = '';
+                screen.style.transition = '';
+            }, 500);
+        }
     });
     
-    // Показываем выбранный экран
-    const targetScreen = document.getElementById(screenName + 'Screen');
-    if (targetScreen) {
+    // Плавное появление нового экрана
+    setTimeout(() => {
         targetScreen.classList.add('active');
-    } else {
-        // Если экран не найден, показываем главный
-        document.getElementById('homeScreen').classList.add('active');
-    }
+        targetScreen.style.opacity = '0';
+        targetScreen.style.transform = 'translateY(30px) scale(0.97)';
+        targetScreen.style.filter = 'blur(10px)';
+        
+        requestAnimationFrame(() => {
+            targetScreen.style.transition = 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            setTimeout(() => {
+                targetScreen.style.opacity = '1';
+                targetScreen.style.transform = 'translateY(0) scale(1)';
+                targetScreen.style.filter = 'blur(0)';
+            }, 10);
+        });
+    }, 500);
 }
 
 // Обработка кликов по пунктам меню
@@ -87,10 +117,14 @@ if (form) {
         e.preventDefault();
         
         // Получаем данные формы
+        let serviceValue = document.getElementById('service').value;
+        // Убираем эмодзи и цену из названия услуги для отправки
+        serviceValue = serviceValue.replace(/^[^\s]+\s+/, '').replace(/\s*-\s*\d+₽$/, '');
+        
         const formData = {
             name: document.getElementById('name').value.trim(),
             phone: document.getElementById('phone').value.trim(),
-            service: document.getElementById('service').value,
+            service: serviceValue,
             date: document.getElementById('date').value,
             time: document.getElementById('time').value
         };
@@ -108,33 +142,58 @@ if (form) {
             return;
         }
         
-        // Отключаем кнопку отправки
+        // Отключаем кнопку отправки с анимацией
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Отправка...';
+            submitBtn.innerHTML = '<span>⏳ Отправка...</span>';
+            submitBtn.style.opacity = '0.7';
+            submitBtn.style.transform = 'scale(0.98)';
         }
         
         try {
             // Отправляем данные в бот через Telegram Web App API
             tg.sendData(JSON.stringify(formData));
             
-            // Показываем сообщение об успехе
-            form.style.display = 'none';
-            if (successMessage) {
-                successMessage.style.display = 'block';
-            }
+            // Максимально плавное скрытие формы и показ сообщения об успехе
+            form.style.transition = 'opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            form.style.opacity = '0';
+            form.style.transform = 'translateY(-30px) scale(0.95)';
+            form.style.filter = 'blur(10px)';
             
-            // Закрываем Mini App через 2 секунды
             setTimeout(() => {
-                tg.close();
-            }, 2000);
+                form.style.display = 'none';
+                if (successMessage) {
+                    successMessage.style.display = 'block';
+                    successMessage.style.opacity = '0';
+                    successMessage.style.transform = 'scale(0.85) rotate(-3deg)';
+                    successMessage.style.filter = 'blur(10px)';
+                    
+                    requestAnimationFrame(() => {
+                        successMessage.style.transition = 'opacity 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55), transform 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55), filter 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                        
+                        setTimeout(() => {
+                            successMessage.style.opacity = '1';
+                            successMessage.style.transform = 'scale(1) rotate(0deg)';
+                            successMessage.style.filter = 'blur(0)';
+                        }, 10);
+                    });
+                }
+            }, 600);
+            
+            // Показываем уведомление в Telegram
+            tg.showAlert('✅ Запись отправлена! Проверьте сообщение в боте.');
+            
+            // НЕ закрываем Mini App автоматически - пусть пользователь сам закроет
+            // Пользователь увидит сообщение в боте с деталями записи
             
         } catch (error) {
             console.error('Ошибка отправки данных:', error);
             tg.showAlert('Произошла ошибка. Попробуйте позже.');
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.textContent = '📅 Записаться';
+                submitBtn.innerHTML = '<span>📅 Записаться</span>';
+                submitBtn.style.opacity = '1';
+                submitBtn.style.transform = 'scale(1)';
             }
         }
     });
@@ -180,6 +239,49 @@ if (profileScreen) {
         }
     });
     observer.observe(profileScreen, { attributes: true, attributeFilter: ['class'] });
+}
+
+// Функция раскрытия/сворачивания услуги с максимально плавной анимацией
+function toggleService(header) {
+    const card = header.closest('.service-card-expandable');
+    if (!card) return;
+    
+    const isExpanded = card.classList.contains('expanded');
+    
+    // Плавный эффект пульсации при клике
+    card.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    card.style.transform = 'scale(0.97)';
+    
+    setTimeout(() => {
+        card.style.transition = '';
+        card.style.transform = '';
+    }, 300);
+    
+    if (isExpanded) {
+        // Плавное закрытие
+        card.style.transition = 'all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        card.classList.remove('expanded');
+    } else {
+        // Закрываем другие открытые карточки с плавной анимацией
+        document.querySelectorAll('.service-card-expandable.expanded').forEach(otherCard => {
+            if (otherCard !== card) {
+                otherCard.style.transition = 'all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                otherCard.classList.remove('expanded');
+                setTimeout(() => {
+                    otherCard.style.transition = '';
+                }, 700);
+            }
+        });
+        
+        // Плавное открытие
+        setTimeout(() => {
+            card.style.transition = 'all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            card.classList.add('expanded');
+            setTimeout(() => {
+                card.style.transition = '';
+            }, 900);
+        }, 100);
+    }
 }
 
 // Инициализация при загрузке

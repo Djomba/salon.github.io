@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись на маникюр</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💅 Запись на маникюр</h1>
+            <p>Заполните форму для записи</p>
+        </div>
+
+        <form id="appointmentForm" class="form">
+            <div class="form-group">
+                <label for="name">Ваше имя *</label>
+                <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Номер телефона *</label>
+                <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 123-45-67">
+            </div>
+
+            <div class="form-group">
+                <label for="service">Выберите услугу *</label>
+                <select id="service" name="service" required>
+                    <option value="">-- Выберите услугу --</option>
+                    <option value="Классический маникюр">Классический маникюр</option>
+                    <option value="Аппаратный маникюр">Аппаратный маникюр</option>
+                    <option value="Покрытие гель-лаком">Покрытие гель-лаком</option>
+                    <option value="Дизайн ногтей">Дизайн ногтей</option>
+                    <option value="Наращивание ногтей">Наращивание ногтей</option>
+                    <option value="Педикюр">Педикюр</option>
+                    <option value="Комплекс (маникюр + педикюр)">Комплекс (маникюр + педикюр)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Выберите дату *</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="time">Выберите время *</label>
+                <select id="time" name="time" required>
+                    <option value="">-- Выберите время --</option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="13:00">13:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="19:00">19:00</option>
+                    <option value="20:00">20:00</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                📅 Записаться
+            </button>
+        </form>
+
+        <div id="successMessage" class="success-message" style="display: none;">
+            <div class="success-content">
+                <h2>✅ Запись успешно создана!</h2>
+                <p>Мы свяжемся с вами для подтверждения.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

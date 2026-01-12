@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маникюрный салон - Запись</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <!-- Фоновые эмоджи -->
+    <div class="emoji-background">
+        <div class="emoji">💅</div>
+        <div class="emoji">✨</div>
+        <div class="emoji">🌸</div>
+        <div class="emoji">💖</div>
+        <div class="emoji">🦋</div>
+        <div class="emoji">🌺</div>
+        <div class="emoji">💐</div>
+        <div class="emoji">🎀</div>
+        <div class="emoji">💅</div>
+        <div class="emoji">✨</div>
+        <div class="emoji">🌸</div>
+        <div class="emoji">💖</div>
+    </div>
+
+    <!-- Главный контейнер -->
+    <div class="container">
+        <!-- Главное меню -->
+        <div id="main-menu" class="screen active">
+            <div class="header">
+                <h1>💅 Маникюрный салон</h1>
+                <p class="welcome-text">Добро пожаловать!</p>
+            </div>
+            
+            <div class="menu-grid">
+                <div class="menu-item" onclick="showScreen('profile')">
+                    <div class="menu-icon">👤</div>
+                    <div class="menu-text">Профиль</div>
+                </div>
+                <div class="menu-item" onclick="showScreen('services')">
+                    <div class="menu-icon">💅</div>
+                    <div class="menu-text">Услуги</div>
+                </div>
+                <div class="menu-item" onclick="showScreen('booking')">
+                    <div class="menu-icon">📅</div>
+                    <div class="menu-text">Запись</div>
+                </div>
+                <div class="menu-item" onclick="showScreen('reviews')">
+                    <div class="menu-icon">⭐</div>
+                    <div class="menu-text">Отзывы</div>
+                </div>
+            </div>
+
+            <div id="admin-menu" class="admin-section" style="display: none;">
+                <div class="admin-divider"></div>
+                <h3>Админ-панель</h3>
+                <div class="menu-item" onclick="showScreen('admin')">
+                    <div class="menu-icon">⚙️</div>
+                    <div class="menu-text">Управление</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Профиль -->
+        <div id="profile" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>Профиль</h2>
+            </div>
+            <div class="profile-content">
+                <div class="profile-avatar">
+                    <div class="avatar-circle">👤</div>
+                </div>
+                <div class="profile-info">
+                    <div class="info-item">
+                        <span class="info-label">Имя:</span>
+                        <span id="profile-name">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Телефон:</span>
+                        <span id="profile-phone">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Мои записи:</span>
+                        <span id="profile-bookings">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Услуги -->
+        <div id="services" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>Наши услуги</h2>
+            </div>
+            <div class="services-list" id="services-list">
+                <!-- Услуги загружаются динамически -->
+            </div>
+        </div>
+
+        <!-- Запись -->
+        <div id="booking" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>Запись на маникюр</h2>
+            </div>
+            <form id="booking-form" class="booking-form">
+                <div class="form-group">
+                    <label>Выберите услугу</label>
+                    <select id="booking-service" class="form-input" required>
+                        <option value="">Выберите услугу...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Выберите дату</label>
+                    <input type="date" id="booking-date" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Выберите время</label>
+                    <select id="booking-time" class="form-input" required>
+                        <option value="">Выберите время...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ваше имя</label>
+                    <input type="text" id="booking-name" class="form-input" placeholder="Введите ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <label>Номер телефона</label>
+                    <input type="tel" id="booking-phone" class="form-input" placeholder="+7 (999) 123-45-67" required>
+                </div>
+                <div class="form-group">
+                    <label>Комментарий (необязательно)</label>
+                    <textarea id="booking-comment" class="form-input" rows="3" placeholder="Дополнительные пожелания..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Записаться</button>
+            </form>
+        </div>
+
+        <!-- Отзывы -->
+        <div id="reviews" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>Отзывы</h2>
+            </div>
+            <div class="reviews-list" id="reviews-list">
+                <!-- Отзывы загружаются динамически -->
+            </div>
+            <button class="add-review-btn" onclick="showAddReview()">Написать отзыв</button>
+        </div>
+
+        <!-- Админ-панель -->
+        <div id="admin" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" onclick="showScreen('main-menu')">← Назад</button>
+                <h2>Админ-панель</h2>
+            </div>
+            <div class="admin-content">
+                <div class="admin-tabs">
+                    <button class="tab-btn active" onclick="showAdminTab('services-admin')">Услуги</button>
+                    <button class="tab-btn" onclick="showAdminTab('schedule-admin')">Расписание</button>
+                    <button class="tab-btn" onclick="showAdminTab('bookings-admin')">Записи</button>
+                </div>
+
+                <!-- Управление услугами -->
+                <div id="services-admin" class="admin-tab active">
+                    <div class="admin-section-header">
+                        <h3>Редактор услуг</h3>
+                        <button class="add-btn" onclick="showAddService()">+ Добавить услугу</button>
+                    </div>
+                    <div id="admin-services-list" class="admin-list">
+                        <!-- Услуги загружаются динамически -->
+                    </div>
+                </div>
+
+                <!-- Управление расписанием -->
+                <div id="schedule-admin" class="admin-tab">
+                    <div class="admin-section-header">
+                        <h3>Расписание работы</h3>
+                    </div>
+                    <div class="schedule-form">
+                        <div class="form-group">
+                            <label>Выберите дату</label>
+                            <input type="date" id="schedule-date" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Доступное время (через запятую, например: 10:00, 12:00, 14:00)</label>
+                            <input type="text" id="schedule-times" class="form-input" placeholder="10:00, 12:00, 14:00, 16:00, 18:00, 20:00" required>
+                        </div>
+                        <button class="submit-btn" onclick="saveSchedule()">Сохранить расписание</button>
+                    </div>
+                    <div id="schedule-list" class="admin-list">
+                        <!-- Расписание загружается динамически -->
+                    </div>
+                </div>
+
+                <!-- Просмотр записей -->
+                <div id="bookings-admin" class="admin-tab">
+                    <div class="admin-section-header">
+                        <h3>Все записи</h3>
+                        <button class="export-btn" onclick="exportToExcel()">📊 Экспорт в Excel</button>
+                    </div>
+                    <div id="admin-bookings-list" class="admin-list">
+                        <!-- Записи загружаются динамически -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальные окна -->
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

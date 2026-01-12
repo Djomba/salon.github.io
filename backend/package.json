@@ -1,0 +1,28 @@
+{
+  "name": "manicure-salon-backend",
+  "version": "1.0.0",
+  "description": "Backend для Mini App маникюрного салона",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "bot": "node bot.js",
+    "both": "node start.js"
+  },
+  "keywords": [
+    "telegram",
+    "miniapp",
+    "manicure"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "node-telegram-bot-api": "^0.64.0",
+    "exceljs": "^4.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
